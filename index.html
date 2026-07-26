@@ -207,11 +207,23 @@
     }
 
     .hero {
-      position: relative;
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: center;
-      overflow: hidden;
+  position: relative;
+  min-height: calc(100vh - 72px);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.75)
+    ),
+    url("images/hero.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
     }
 
     .hero::after {
