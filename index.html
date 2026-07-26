@@ -148,13 +148,19 @@
     }
 
     .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid var(--line);
-      background: rgba(7, 10, 12, 0.74);
-      backdrop-filter: blur(16px);
-    }
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  background: rgba(8, 10, 12, 0.45);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(77, 222, 138, 0.15);
+
+  transition: all 0.3s ease;
+}
 
     .nav {
       display: flex;
