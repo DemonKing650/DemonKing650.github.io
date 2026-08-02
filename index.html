@@ -4068,13 +4068,43 @@ section[id] {
 }
 
 .command-map-genesis {
-    background:
-        linear-gradient(
-            90deg,
-            rgba(5, 12, 10, 0.70),
-            rgba(5, 12, 10, 0.92)
-        ),
-        url("./images/GenesisMap.jpg") center / cover no-repeat;
+    background: #08100d !important;
+}
+
+.command-map-background,
+.command-map-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.command-map-background {
+    z-index: 0;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+}
+
+.command-map-shade {
+    z-index: 1;
+    background: linear-gradient(
+        90deg,
+        rgba(5, 12, 10, 0.42),
+        rgba(5, 12, 10, 0.76)
+    );
+}
+
+.command-map-genesis .command-map-glow {
+    z-index: 2;
+}
+
+.command-map-genesis .command-map-top,
+.command-map-genesis .command-map-middle,
+.command-map-genesis .command-map-tags {
+    position: relative;
+    z-index: 3;
 }
 .command-map-glow {
     position: absolute;
