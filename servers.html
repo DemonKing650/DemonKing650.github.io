@@ -1,0 +1,1456 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="ZoD Varynth ARK: Survival Ascended servers, settings, transfers, and connection information."><title>Servers | ZoD Varynth</title><style>
+    :root {
+      --bg: #080b0d;
+      --bg-soft: #0d1216;
+      --panel: rgba(17, 24, 29, 0.84);
+      --panel-strong: #11181d;
+      --text: #f3f7f5;
+      --muted: #9ba9a3;
+      --green: #4dde8a;
+      --green-dark: #1d8f59;
+      --gold: #d4aa55;
+      --danger: #ff6b6b;
+      --line: rgba(255, 255, 255, 0.08);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.38);
+      --radius: 18px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(77, 222, 138, 0.08), transparent 28%),
+        radial-gradient(circle at 90% 18%, rgba(212, 170, 85, 0.08), transparent 24%),
+        linear-gradient(180deg, #07090b 0%, #0b1014 45%, #07090b 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      max-width: 720px;
+      margin-bottom: 36px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), transparent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: 0.22s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: #06140d;
+      background: linear-gradient(135deg, var(--green), #8ff0b7);
+      box-shadow: 0 12px 30px rgba(77, 222, 138, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(77, 222, 138, 0.3);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(77, 222, 138, 0.45);
+      background: rgba(77, 222, 138, 0.08);
+    }
+
+    .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  background: rgba(8, 10, 12, 0.45);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(77, 222, 138, 0.15);
+
+  transition: all 0.3s ease;
+}
+
+    .nav {
+      display: flex;
+      min-height: 72px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgba(77, 222, 138, 0.4);
+      border-radius: 50%;
+      color: var(--green);
+      background: radial-gradient(circle, rgba(77, 222, 138, 0.18), rgba(77, 222, 138, 0.02));
+      box-shadow: inset 0 0 18px rgba(77, 222, 138, 0.14);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      color: var(--text);
+      background: transparent;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+ .hero {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.35),
+            rgba(0, 0, 0, 0.75)
+        ),
+        url("/images/Hero.png");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.hero::after {
+    content: "";
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -30%;
+    height: 55%;
+    pointer-events: none;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(77, 222, 138, 0.14),
+        transparent 65%
+    );
+
+    filter: blur(20px);
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 54px;
+    padding: 72px 0;
+}
+
+.hero h1 {
+    max-width: 760px;
+    font-size: clamp(3.2rem, 8vw, 6.8rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+
+    text-shadow:
+        0 0 15px rgba(0,0,0,.60),
+        0 0 40px rgba(77,222,138,.25);
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--green);
+    text-shadow:
+        0 0 15px rgba(77,222,138,.35),
+        0 0 40px rgba(77,222,138,.20);
+}
+
+.hero-copy {
+    max-width: 680px;
+    margin: 24px 0 30px;
+    color: var(--muted);
+    font-size: clamp(1rem, 2vw, 1.22rem);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 38px;
+}
+
+.stat {
+    position: relative;
+    padding: 18px 16px;
+    overflow: hidden;
+
+    background: linear-gradient(
+        145deg,
+        rgba(18, 25, 28, 0.82),
+        rgba(8, 12, 14, 0.68)
+    );
+
+    border: 1px solid rgba(77, 222, 138, 0.16);
+    border-radius: 16px;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 16px 36px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.stat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(77,222,138,.75),
+        transparent
+    );
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    border-color: rgba(77,222,138,.38);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.38),
+        0 0 28px rgba(77,222,138,.10);
+}
+
+.stat strong {
+    display: block;
+    margin-bottom: 5px;
+
+    color: #ffffff;
+    font-size: 1.35rem;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: .84rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+@media (max-width:700px){
+    .hero-stats{
+        grid-template-columns:1fr;
+    }
+}
+
+    .hero-card {
+      position: relative;
+      padding: 30px;
+      border: 1px solid rgba(77, 222, 138, 0.18);
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(77, 222, 138, 0.08), transparent 45%),
+        rgba(12, 17, 20, 0.84);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      top: -80px;
+      right: -60px;
+      border: 1px solid rgba(212, 170, 85, 0.18);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 26px rgba(212, 170, 85, 0.035),
+        0 0 0 58px rgba(77, 222, 138, 0.025);
+    }
+
+    .hero-card h2 {
+      position: relative;
+      margin-bottom: 8px;
+      font-size: 1.65rem;
+    }
+
+    .hero-card p {
+      position: relative;
+      margin-bottom: 24px;
+      color: var(--muted);
+    }
+
+    .status-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .status-name {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 800;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .status-badge {
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+      transition: 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(77, 222, 138, 0.24);
+    }
+
+    .feature-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      margin-bottom: 18px;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--green);
+      background: rgba(77, 222, 138, 0.1);
+      font-size: 1.25rem;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+   /* ========================================
+   PHASE 2 — CINEMATIC SERVER CARDS
+======================================== */
+
+.server-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+}
+
+.server-card {
+    position: relative;
+    min-height: 430px;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding: 0;
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    isolation: isolate;
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* The Center image */
+.server-grid .server-card:nth-child(1) {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5, 8, 10, 0.05) 5%,
+            rgba(5, 8, 10, 0.25) 45%,
+            rgba(5, 8, 10, 0.96) 100%
+        ),
+        url("./images/TheCenter.jpg");
+}
+
+/* Lost Colony image */
+.server-grid .server-card:nth-child(2) {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5, 8, 10, 0.05) 5%,
+            rgba(5, 8, 10, 0.25) 45%,
+            rgba(5, 8, 10, 0.96) 100%
+        ),
+        url("./images/LostColony.jpg");
+}
+
+/* Green lighting effect */
+.server-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(77, 222, 138, 0.15),
+            transparent 42%
+        );
+
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+/* Glowing line along bottom */
+.server-card::after {
+    content: "";
+    position: absolute;
+
+    left: 8%;
+    right: 8%;
+    bottom: 0;
+
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(77, 222, 138, 0.95),
+            transparent
+        );
+
+    box-shadow: 0 0 18px rgba(77, 222, 138, 0.65);
+}
+
+.server-card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(77, 222, 138, 0.42);
+
+    box-shadow:
+        0 30px 72px rgba(0, 0, 0, 0.55),
+        0 0 34px rgba(77, 222, 138, 0.12);
+}
+
+.server-card:hover::before {
+    opacity: 1;
+}
+
+/* Content area inside each card */
+.server-card > div {
+    width: 100%;
+    padding: 34px;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            rgba(7, 10, 12, 0.32)
+        );
+}
+
+.server-card h3 {
+    margin-bottom: 8px;
+
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    line-height: 1.1;
+
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.9),
+        0 0 20px rgba(77, 222, 138, 0.14);
+}
+
+.server-card p {
+    max-width: 520px;
+
+    color: rgba(235, 242, 239, 0.82);
+    font-size: 0.96rem;
+}
+
+.server-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin: 16px 0 18px;
+}
+
+.server-card .pill {
+    padding: 7px 11px;
+
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    border-radius: 999px;
+
+    color: #e9f7ef;
+    background: rgba(8, 12, 14, 0.65);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.server-card .pill:first-child {
+    color: var(--green);
+
+    border-color: rgba(77, 222, 138, 0.35);
+    background: rgba(77, 222, 138, 0.10);
+}
+
+/* Online indicator */
+.server-status-line {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 12px;
+
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.server-status-line::before {
+    content: "";
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: var(--green);
+
+    box-shadow:
+        0 0 8px var(--green),
+        0 0 18px rgba(77, 222, 138, 0.65);
+
+    animation: serverPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes serverPulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.55;
+        transform: scale(0.82);
+    }
+}
+
+@media (max-width: 720px) {
+    .server-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .server-card {
+        min-height: 390px;
+    }
+
+    .server-card > div {
+        padding: 26px;
+    }
+}
+
+    .server-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 18px;
+    }
+
+    .pill {
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .mods-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .mod-card {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .mod-number {
+      flex: 0 0 auto;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 12px;
+      color: var(--gold);
+      background: rgba(212, 170, 85, 0.1);
+      font-weight: 900;
+    }
+
+    .cta {
+      padding: 46px;
+      border: 1px solid rgba(77, 222, 138, 0.2);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 10% 30%, rgba(77, 222, 138, 0.13), transparent 35%),
+        radial-gradient(circle at 90% 70%, rgba(212, 170, 85, 0.12), transparent 30%),
+        var(--panel-strong);
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .cta p {
+      max-width: 680px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .mods-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-card {
+        max-width: 700px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        position: absolute;
+        top: 72px;
+        left: 16px;
+        right: 16px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: #0c1115;
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: block;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-content {
+        padding: 54px 0;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid,
+      .server-grid,
+      .mods-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .cta {
+        padding: 34px 22px;
+      }
+    }/* ========================================
+   PHASE 1 — FINAL HERO POLISH
+======================================== */
+
+/* Navigation polish */
+.site-header {
+    background: rgba(8, 10, 12, 0.58);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(77, 222, 138, 0.14);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+
+.nav-links > a:not(.btn) {
+    position: relative;
+    padding: 8px 0;
+    transition: color 0.25s ease;
+}
+
+.nav-links > a:not(.btn)::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(77, 222, 138, 0.65);
+    transform: translateX(-50%);
+    transition: width 0.25s ease;
+}
+
+.nav-links > a:not(.btn):hover::after {
+    width: 100%;
+}
+
+/* Hero depth and readability */
+.hero {
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 70% 35%,
+            rgba(77, 222, 138, 0.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(5, 8, 10, 0.42) 0%,
+            rgba(5, 8, 10, 0.14) 55%,
+            rgba(5, 8, 10, 0.28) 100%
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content > div {
+    animation: heroTextEnter 0.9s ease both;
+}
+
+.hero-card {
+    animation: heroCardEnter 1s 0.15s ease both;
+}
+
+@keyframes heroTextEnter {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroCardEnter {
+    from {
+        opacity: 0;
+        transform: translateX(28px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Hero headline */
+.hero h1 {
+    text-wrap: balance;
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.8),
+        0 0 34px rgba(77, 222, 138, 0.16);
+}
+
+.hero h1 span {
+    background: linear-gradient(
+        135deg,
+        #b7ffd3 0%,
+        var(--green) 48%,
+        #24a966 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter: drop-shadow(0 0 16px rgba(77, 222, 138, 0.25));
+}
+
+/* Hero buttons */
+.hero-actions .btn {
+    position: relative;
+    overflow: hidden;
+    min-width: 170px;
+}
+
+.hero-actions .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -130%;
+    width: 80%;
+    height: 100%;
+    pointer-events: none;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent
+    );
+
+    transform: skewX(-22deg);
+    transition: left 0.55s ease;
+}
+
+.hero-actions .btn:hover::before {
+    left: 150%;
+}
+
+/* Premium hero stat cards */
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 38px;
+}
+
+.stat {
+    position: relative;
+    overflow: hidden;
+    padding: 19px 17px;
+
+    border: 1px solid rgba(77, 222, 138, 0.18);
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20, 28, 31, 0.80),
+            rgba(8, 12, 14, 0.62)
+        );
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    box-shadow:
+        0 16px 36px rgba(0, 0, 0, 0.30),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.stat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 12%;
+    width: 76%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(77, 222, 138, 0.85),
+        transparent
+    );
+}
+
+.stat::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    right: -42px;
+    bottom: -48px;
+    border-radius: 50%;
+    background: rgba(77, 222, 138, 0.08);
+    filter: blur(4px);
+}
+
+.stat:hover {
+    transform: translateY(-5px);
+    border-color: rgba(77, 222, 138, 0.42);
+
+    box-shadow:
+        0 22px 46px rgba(0, 0, 0, 0.40),
+        0 0 26px rgba(77, 222, 138, 0.10);
+}
+
+.stat strong {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-bottom: 4px;
+
+    color: #ffffff;
+    font-size: clamp(1.15rem, 2vw, 1.4rem);
+    line-height: 1.2;
+}
+
+.stat span {
+    position: relative;
+    z-index: 1;
+
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+/* Mobile Phase 1 polish */
+@media (max-width: 960px) {
+    .hero-content {
+        gap: 34px;
+    }
+
+    .hero h1 {
+        font-size: clamp(3rem, 10vw, 5.5rem);
+    }
+}
+
+@media (max-width: 720px) {
+    .hero {
+        background-position: 62% center;
+    }
+
+    .hero-content {
+        padding: 48px 0 58px;
+    }
+
+    .hero-copy {
+        margin-top: 20px;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+    }
+
+    .hero-actions .btn {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 28px;
+    }
+
+    .stat {
+        padding: 16px;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .hero-content > div,
+    .hero-card {
+        animation: none;
+    }
+
+    .stat,
+    .btn,
+    .nav-links a {
+        transition: none;
+    }
+}
+  
+.page-hero{position:relative;min-height:62vh;display:grid;align-items:end;overflow:hidden;isolation:isolate;background-image:linear-gradient(180deg,rgba(5,8,10,.18),rgba(5,8,10,.54) 48%,rgba(5,8,10,.96)),url("./images/TheCenter.jpg");background-size:cover;background-position:center}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 70% 30%,rgba(77,222,138,.15),transparent 34%),linear-gradient(90deg,rgba(5,8,10,.76),rgba(5,8,10,.2) 62%,rgba(5,8,10,.4))}
+.page-hero-content{position:relative;z-index:2;padding:120px 0 72px}.page-hero h1{max-width:880px;margin-bottom:20px;font-size:clamp(3rem,7vw,6rem);line-height:.96;letter-spacing:-.055em;text-shadow:0 4px 18px rgba(0,0,0,.9),0 0 42px rgba(77,222,138,.15)}
+.page-hero-copy{max-width:720px;color:rgba(235,242,239,.82);font-size:clamp(1rem,2vw,1.18rem)}.page-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.server-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+}
+
+.server-detail-center {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5,8,10,.04),
+            rgba(5,8,10,.26) 45%,
+            rgba(5,8,10,.98)
+        ),
+        url("./images/TheCenter.jpg");
+}
+
+.server-detail-lost {
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5,8,10,.04),
+            rgba(5,8,10,.26) 45%,
+            rgba(5,8,10,.98)
+        ),
+        url("./images/LostColony.jpg");
+}
+
+.server-detail-genesis {
+    grid-column: 1 / -1;
+
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5,8,10,.04),
+            rgba(5,8,10,.26) 45%,
+            rgba(5,8,10,.98)
+        ),
+        url("./images/GenesisMap.jpg");
+}
+
+@media (max-width: 960px) {
+    .server-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .server-detail-genesis {
+        grid-column: auto;
+    }
+}
+
+.server-detail-content {
+    width: 100%;
+    padding: 34px;
+}
+.server-detail-badges{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 20px}.server-detail-badges span{padding:7px 11px;border:1px solid rgba(255,255,255,.13);border-radius:999px;color:#e9f7ef;background:rgba(8,12,14,.66);font-size:.7rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.online-row{display:inline-flex;align-items:center;gap:9px;margin-bottom:12px;color:var(--green);font-size:.75rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.online-row::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green),0 0 18px rgba(77,222,138,.62)}
+.info-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.info-card{min-height:220px;padding:26px;border:1px solid rgba(255,255,255,.085);border-radius:20px;background:linear-gradient(145deg,rgba(18,25,29,.94),rgba(9,13,16,.88));box-shadow:0 18px 42px rgba(0,0,0,.25);transition:.3s ease}.info-card:hover{transform:translateY(-5px);border-color:rgba(77,222,138,.28)}.info-card-icon{display:grid;width:46px;height:46px;margin-bottom:18px;place-items:center;border-radius:14px;color:var(--green);background:rgba(77,222,138,.10);font-size:1.18rem}.info-card h3{margin-bottom:10px}.info-card p,.info-card li{color:var(--muted);font-size:.92rem}.info-card ul{display:grid;gap:10px;padding-left:18px}
+.settings-table{overflow:hidden;border:1px solid rgba(255,255,255,.085);border-radius:22px;background:linear-gradient(145deg,rgba(17,24,28,.94),rgba(8,12,15,.92));box-shadow:0 22px 54px rgba(0,0,0,.3)}.settings-row{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;align-items:center;padding:18px 24px;border-top:1px solid rgba(255,255,255,.065)}.settings-row:first-child{border-top:0}.settings-row span:first-child{color:var(--muted);font-weight:700}.settings-row strong{text-align:right}
+.future-map{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:24px;border:1px dashed rgba(212,170,85,.3);border-radius:20px;background:rgba(212,170,85,.045)}.future-map-icon{display:grid;width:50px;height:50px;place-items:center;border-radius:15px;color:var(--gold);background:rgba(212,170,85,.1)}.future-map p{color:var(--muted);font-size:.92rem}.future-map-badge{padding:7px 11px;border:1px solid rgba(212,170,85,.28);border-radius:999px;color:var(--gold);background:rgba(212,170,85,.08);font-size:.68rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:960px){.server-detail-grid,.info-grid{grid-template-columns:1fr}}@media(max-width:620px){.page-hero-content{padding:90px 0 56px}.settings-row{grid-template-columns:1fr;gap:5px}.settings-row strong{text-align:left}.future-map{grid-template-columns:1fr}}
+</style></head><body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="./index.html"><span class="brand-mark">Z</span><span>ZoD VARYNTH</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="./index.html#about">About</a>
+      <a href="./servers.html">Servers</a>
+      <a href="./index.html#mods">Mods</a>
+      <a href="./index.html#community">Community</a>
+      <a class="btn btn-primary" href="https://discord.gg/zodiacofdarkness" target="_blank" rel="noopener">Join Discord</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <div class="eyebrow">ZoD Varynth Cluster</div>
+      <h1>Explore every world in the cluster.</h1>
+      <p class="page-hero-copy">Review current maps, server settings, transfer rules, restart information, and connection details before beginning your next ARK adventure.</p>
+      <div class="page-hero-actions">
+        <a class="btn btn-primary" href="https://discord.gg/zodiacofdarkness" target="_blank" rel="noopener">Join the Community</a>
+        <a class="btn btn-secondary" href="#current-maps">View Current Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="current-maps">
+    <div class="container">
+      <div class="eyebrow">Current Maps</div>
+      <h2 class="section-title">Choose your next destination.</h2>
+      <p class="section-subtitle">Your survivor, items, and creatures can move between connected maps through the shared cluster.</p>
+
+      <div class="server-detail-grid">
+
+  <article class="server-detail-card server-detail-center reveal" id="the-center">
+    <div class="server-detail-content">
+      <div class="online-row">Server Online</div>
+
+      <h2>&lt;ZoD&gt; Varynth | The Center</h2>
+
+      <div class="server-detail-badges">
+        <span>PvE</span>
+        <span>Crossplay</span>
+        <span>300 Wild</span>
+        <span>No Wipe</span>
+      </div>
+
+      <p>
+        A vast, dangerous world and one of the primary homes of the ZoD Varynth cluster.
+      </p>
+    </div>
+  </article>
+
+  <article class="server-detail-card server-detail-lost reveal" id="lost-colony">
+    <div class="server-detail-content">
+      <div class="online-row">Server Online</div>
+
+      <h2>&lt;ZoD&gt; Varynth | Lost Colony</h2>
+
+      <div class="server-detail-badges">
+        <span>PvE</span>
+        <span>Crossplay</span>
+        <span>Clustered</span>
+        <span>Modded</span>
+      </div>
+
+      <p>
+        Explore a different frontier while keeping your survivor, equipment, and creatures connected.
+      </p>
+    </div>
+  </article>
+
+  <article class="server-detail-card server-detail-genesis reveal" id="genesis-part-1">
+    <div class="server-detail-content">
+      <div class="online-row">Server Online</div>
+
+      <h2>&lt;ZoD&gt; Varynth | Genesis Part 1</h2>
+
+      <div class="server-detail-badges">
+        <span>PvE</span>
+        <span>Crossplay</span>
+        <span>Clustered</span>
+        <span>300 Wild</span>
+      </div>
+
+      <p>
+        Enter the ARK simulation and conquer unique missions, biomes, and challenges while remaining fully connected to the ZoD Varynth Cluster.
+      </p>
+    </div>
+  </article>
+
+</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="connection">
+    <div class="container">
+      <div class="eyebrow">Getting Started</div>
+      <h2 class="section-title">How to join the cluster.</h2>
+      <p class="section-subtitle">Use the in-game unofficial server browser and confirm that player servers and crossplay results are visible.</p>
+
+      <div class="info-grid">
+        <article class="info-card reveal"><div class="info-card-icon">1</div><h3>Open the server browser</h3><p>Launch ARK: Survival Ascended and choose the unofficial server list.</p></article>
+        <article class="info-card reveal"><div class="info-card-icon">2</div><h3>Search ZoD Varynth</h3><p>Search for <strong>&lt;ZoD&gt; Varynth</strong> and enable the player-server filter when needed.</p></article>
+        <article class="info-card reveal"><div class="info-card-icon">3</div><h3>Choose a map</h3><p>Join The Center or Lost Colony, then use an obelisk or supported terminal to move between maps.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="settings">
+    <div class="container">
+      <div class="eyebrow">Cluster Configuration</div>
+      <h2 class="section-title">Core server settings.</h2>
+      <p class="section-subtitle">The cluster is designed for long-term PvE progression with boosted rates and curated quality-of-life improvements.</p>
+
+      <div class="settings-table reveal">
+        <div class="settings-row"><span>Game mode</span><strong>PvE</strong></div>
+        <div class="settings-row"><span>Maximum wild creature level</span><strong>300</strong></div>
+        <div class="settings-row"><span>Crossplay</span><strong>PC, Xbox, and PlayStation</strong></div>
+        <div class="settings-row"><span>Maximum players</span><strong>70 per map</strong></div>
+        <div class="settings-row"><span>Wipe policy</span><strong>No planned wipes</strong></div>
+        <div class="settings-row"><span>Automatic saves</span><strong>Every 15 minutes</strong></div>
+        <div class="settings-row"><span>Structure pickup</span><strong>Always enabled</strong></div>
+        <div class="settings-row"><span>Third-person and crosshair</span><strong>Enabled</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="operations">
+    <div class="container">
+      <div class="eyebrow">Server Operations</div>
+      <h2 class="section-title">Restarts, transfers, and support.</h2>
+      <p class="section-subtitle">Operational details will continue to be updated as the cluster expands.</p>
+
+      <div class="info-grid">
+        <article class="info-card reveal"><div class="info-card-icon">↻</div><h3>Restart schedule</h3><p>Automatic restart times will be posted in Discord. Players receive advance notice before scheduled downtime.</p></article>
+        <article class="info-card reveal"><div class="info-card-icon">⇄</div><h3>Cluster transfers</h3><ul><li>Survivor transfers are supported.</li><li>Items and creatures may move between connected maps.</li><li>Transfers should be completed through supported terminals.</li></ul></article>
+        <article class="info-card reveal"><div class="info-card-icon">?</div><h3>Player support</h3><p>Use Discord for connection problems, transfer issues, lost-character reports, and server announcements.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="future-maps">
+    <div class="container">
+      <div class="eyebrow">Cluster Expansion</div>
+      <h2 class="section-title">More worlds are planned.</h2>
+      <p class="section-subtitle">Future maps will be announced after testing, performance review, and mod compatibility checks.</p>
+
+      <div class="future-map reveal">
+        <div class="future-map-icon">＋</div>
+        <div><h3>Future map slot</h3><p>Watch Discord for the next confirmed addition to the ZoD Varynth cluster.</p></div>
+        <span class="future-map-badge">Coming Soon</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta reveal">
+        <div class="eyebrow">Need Assistance?</div>
+        <h2>Join the ZoD Varynth Discord.</h2>
+        <p>Get announcements, restart warnings, support, tribe recruitment, community events, and future-map updates.</p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="https://discord.gg/zodiacofdarkness" target="_blank" rel="noopener">Join Discord</a>
+          <a class="btn btn-secondary" href="./index.html">Return Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> ZoD Varynth. All rights reserved.</p>
+    <p>ARK: Survival Ascended is owned by Studio Wildcard. ZoD Varynth is an independent community.</p>
+  </div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(isOpen));
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  });
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body></html>
