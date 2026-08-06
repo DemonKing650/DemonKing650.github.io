@@ -1223,7 +1223,23 @@
         ),
         url("./images/GenesisMap.jpg");
 }
+    
+ .server-detail-bjarnheim {
+    grid-column: 1 / -1;
 
+    background-image:
+        linear-gradient(
+            180deg,
+            rgba(5, 8, 10, 0.04),
+            rgba(5, 8, 10, 0.26) 45%,
+            rgba(5, 8, 10, 0.98)
+        ),
+        url("./images/Bjarnheim.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;   
+ }
 @media (max-width: 960px) {
     .server-detail-grid {
         grid-template-columns: 1fr;
@@ -1336,7 +1352,30 @@
       </p>
     </div>
   </article>
+          
+<article
+  class="server-detail-card server-detail-bjarnheim reveal"
+  id="bjarnheim"
+>
+  <div class="server-detail-content">
+    <div class="online-row">Server Online</div>
 
+    <h2>&lt;ZoD&gt; Varynth | Bjarnheim</h2>
+
+    <div class="server-detail-badges">
+      <span>PvE</span>
+      <span>Crossplay</span>
+      <span>Modded Map</span>
+      <span>300 Wild</span>
+    </div>
+
+    <p>
+      Journey into a harsh northern frontier filled with frozen mountains,
+      ancient forests, rugged settlements, and connected cluster progression.
+    </p>
+  </div>
+</article>
+          
 </div>
       </div>
     </div>
